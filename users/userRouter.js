@@ -1,9 +1,17 @@
 const express = require('express');
+const users = require("./userDb")
+const posts = require("../posts/postDb")
+const {validateUserId, validateUser, validatePost} = require("../middleware/validate")
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.post('/', validateUser(), (req, res) => {
   // do your magic!
+  users.insert(req.body)
+  .then((user) => {
+    res.status(201).json(user)
+  })
+  .catch(next)
 });
 
 router.post('/:id/posts', (req, res) => {
