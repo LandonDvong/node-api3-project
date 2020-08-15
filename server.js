@@ -6,6 +6,8 @@ const server = express();
 
 server.use(express.json())
 
+
+
 // Custom middleware
 server.use(logger())
 
