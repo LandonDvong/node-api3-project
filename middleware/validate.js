@@ -33,12 +33,12 @@ function validateUser() {
 
 function validatePost() {
     return (req, res, next) => {
-        if(!req.body.id || !req.body.text || req.body.user_id) {
+        if(!req.body.text || !req.body.user_id) {
            res.status(400).json({
                message: "missing post data"
            })
         } else if 
-            (!req.body.text || req.body.user_id) {
+            (!req.body.text || !req.body.user_id) {
                 res.status(400).json({
                     message: "missing required text field"
                 })

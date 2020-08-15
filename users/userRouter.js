@@ -1,6 +1,5 @@
 const express = require('express');
 const users = require("./userDb")
-const posts = require("../posts/postDb")
 const {validateUserId, validateUser, validatePost} = require("../middleware/validate")
 
 const router = express.Router();
@@ -68,7 +67,10 @@ router.put('/:id', validateUserId(), validateUser(), (req, res, next) => {
   users.update(req.params.id, req.body)
   .then((user) => {
     if (user) {
-      res.status(200).json(user)
+      res.status(200).json({
+        id: req.body.id,
+        name: req.body.name
+      })
     }
   })
   .catch(error => {
@@ -76,18 +78,6 @@ router.put('/:id', validateUserId(), validateUser(), (req, res, next) => {
   })
 });
 
-//custom middleware
 
-function validateUserId(req, res, next) {
-  // do your magic!
-}
-
-function validateUser(req, res, next) {
-  // do your magic!
-}
-
-function validatePost(req, res, next) {
-  // do your magic!
-}
 
 module.exports = router;
