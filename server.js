@@ -12,6 +12,14 @@ server.use(express.json())
 server.use(logger())
 
 server.use(userRouter)
+server.get('/', (req, res) => {
+    res.send(`
+    <div>
+        <h1>Welcome to Quake Live!</h1>
+      
+    </div>
+    `)
+})
 
 server.use((error, req, res, next) => {
     console.log(error)
